@@ -5,27 +5,20 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col">
-            1 of 3
-        </div>
-        <div class="col-6">
-            2 of 3 (wider)
-        </div>
-        <div class="col">
-            3 of 3
-        </div>
+@Html.Partial("_TopArticlesPartial");
+
+
+@*<div class="card mb-4 shadow-sm">
+    <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Category</h4>
     </div>
-    <div class="row">
-        <div class="col">
-            1 of 3
-        </div>
-        <div class="col-5">
-            2 of 3 (wider)
-        </div>
-        <div class="col">
-            3 of 3
-        </div>
-    </div>
-</div>
+    <div class="card-body">
+        <h1 class="card-title pricing-card-title">Articles: <small class="text-muted"></small></h1>
+        <ul class="list-unstyled mt-3 mb-4">
+            <li>a</li>
+            <li>b</li>
+            <li>c</li>
+            <li>d</li>
+        </ul>
+        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Button</button>
+    </div>*@

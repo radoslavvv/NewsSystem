@@ -12,9 +12,9 @@ namespace NewsSystem.Services
 {
     public class ArticlesService : Service
     {
-        public IEnumerable<ArticleViewModel> ListAllArticles()
+        public IEnumerable<ArticleViewModel> ListTopThreeArticles()
         {
-            IEnumerable<Article> articles = this.Context.Articles.ToList();
+            IEnumerable<Article> articles = this.Context.Articles.OrderBy(a => a.Likes.Count).Take(3).ToList();
             IEnumerable<ArticleViewModel> articleViewModels = Mapper.Instance.Map<IEnumerable<Article>, IEnumerable<ArticleViewModel>>(articles);
 
             return articleViewModels;

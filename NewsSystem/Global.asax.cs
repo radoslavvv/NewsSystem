@@ -26,7 +26,7 @@ namespace NewsSystem
         {
             Mapper.Initialize(expression =>
             {
-                expression.CreateMap<Article, ArticleViewModel>();
+                expression.CreateMap<Article, ArticleViewModel>().ForMember(vm => vm.Content, cfg => cfg.MapFrom(a => a.Content.Substring(0, 150) + "..."));
                 //expression.CreateMap<Car, CarVm>();
                 //expression.CreateMap<Supplier, SupplierVm>()
                 //    .ForMember(vm => vm.NumberOfPartsToSupply,

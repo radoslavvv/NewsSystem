@@ -39,5 +39,12 @@ textarea {
     padding-right: 100px;
     font-size: 20px;
 }
+.card{
+    padding: 35px;
+}
+
+#front-page-articles{
+    margin-top:50px;;
+}
 
 

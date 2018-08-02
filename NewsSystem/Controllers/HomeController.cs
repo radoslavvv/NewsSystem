@@ -19,7 +19,7 @@ namespace NewsSystem.Controllers
         public ActionResult Index()
         {
             NewsSystemContext context = new NewsSystemContext();
-            var articles = this.articlesService.ListAllArticles();
+            var articles = this.articlesService.ListTopThreeArticles();
             return View(articles);
         }
 

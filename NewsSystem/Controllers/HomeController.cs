@@ -1,4 +1,5 @@
 ﻿using NewsSystem.Data;
+using NewsSystem.Models.ViewModels;
 using NewsSystem.Services;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,21 @@ namespace NewsSystem.Controllers
     public class HomeController : Controller
     {
         private ArticlesService articlesService;
+        private CategoriesServices categoriesService;
+
         public HomeController()
         {
             this.articlesService = new ArticlesService();
+            this.categoriesService = new CategoriesServices();
         }
 
         public ActionResult Index()
         {
             NewsSystemContext context = new NewsSystemContext();
-            var articles = this.articlesService.ListTopThreeArticles();
+            IEnumerable<ArticleViewModel> articles = this.articlesService.ListTopThreeArticles();
+            IEnumerable<CategoryViewModel> categories = this.categoriesService.GetAllCategories();
+
+            ViewBag.Categories = categories;
             return View(articles);
         }
 

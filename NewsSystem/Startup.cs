@@ -14,7 +14,6 @@ namespace NewsSystem
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            Seed();
         }
 
         public void Seed()
@@ -27,10 +26,13 @@ namespace NewsSystem
                 new Category(){ Name = "Technology"},
                 new Category(){ Name = "Politics"},
                 new Category(){ Name = "Health"},
-                new Category(){ Name = "Technology"},
+                new Category(){ Name = "World News"},
                 new Category(){ Name = "Business"},
                 new Category(){ Name = "Entertainment"}
             };
+
+            context.Categories.AddRange(categories);
+            context.SaveChanges();
 
             List<string> titles = new List<string>()
             {
@@ -48,16 +50,34 @@ namespace NewsSystem
                 " Nullam enim tellus, mattis eget porttitor accumsan, egestas quis lorem. Nulla non neque sed tortor elementum consequat et vel dolor. Phasellus vulputate, arcu pharetra pretium feugiat, felis erat posuere mi, sed laoreet lectus nibh eget urna. In eget enim lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel diam velit. Curabitur eu consequat felis. Etiam non nisl non velit finibus cursus sed sed erat. Sed laoreet, sapien ac porta varius, sem purus hendrerit orci, non posuere nibh ipsum quis lacus. Integer posuere lobortis nunc ut malesuada. Sed consequat felis eget magna mollis, nec dapibus felis volutpat. Nunc vitae arcu id dolor gravida tempor. Nulla facilisi. "
             };
 
-            context.Categories.AddRange(categories);
-            context.SaveChanges();
 
             User user = context.Users.FirstOrDefault();
             List<Article> articles = new List<Article>()
             {
-                new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[randomizer.Next(0,categories.Count -1)].CategoryId, Author = user, CreationDate = DateTime.Now},
-                new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)] , Content= contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[randomizer.Next(0,categories.Count -1)].CategoryId, Author = user, CreationDate = DateTime.Now },
-                new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content= contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[randomizer.Next(0,categories.Count -1)].CategoryId, Author = user, CreationDate = DateTime.Now},
-                new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content= contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[randomizer.Next(0,categories.Count -1)].CategoryId, Author = user, CreationDate = DateTime.Now },
+                new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[0].CategoryId, Author = user, CreationDate = DateTime.Now},
+                  new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[0].CategoryId, Author = user, CreationDate = DateTime.Now},
+                    new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[0].CategoryId, Author = user, CreationDate = DateTime.Now},  new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[0].CategoryId, Author = user, CreationDate = DateTime.Now},
+                      new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[1].CategoryId, Author = user, CreationDate = DateTime.Now},
+                        new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[1].CategoryId, Author = user, CreationDate = DateTime.Now},
+                          new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[1].CategoryId, Author = user, CreationDate = DateTime.Now},
+                            new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[1].CategoryId, Author = user, CreationDate = DateTime.Now},
+                              new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[2].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[2].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                  new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[2].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                    new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[2].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                      new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[3].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                        new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[3].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                          new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[3].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                            new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[3].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                              new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[4].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                                new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[4].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                                  new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[4].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                                    new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[4].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                                      new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[5].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                                        new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[5].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                                          new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[5].CategoryId, Author = user, CreationDate = DateTime.Now},
+                                                            new Article(){ Title = titles[randomizer.Next(0, titles.Count - 1)], Content = contents[randomizer.Next(0, contents.Count-1)], CategoryId = categories[5].CategoryId, Author = user, CreationDate = DateTime.Now},
+
             };
 
             context.Articles.AddRange(articles);

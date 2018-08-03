@@ -15,8 +15,6 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
-            @Html.ActionLink("News System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand actionLink" })
-
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     @Html.ActionLink("Home", "Index", "Home", null, new { @class = "actionLink nav-link" })
@@ -27,29 +25,25 @@
                 <li class="nav-item">
                     @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "actionLink nav-link" })
                 </li>
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("News", "ListAllNews", "News", null, new { @class = "actionLink nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Categories", "ListAllCategories", "Category", null, new { @class = "actionLink nav-link" })
+                    </li>
+                }
             </ul>
             <ul class="navbar-nav ">
                 @Html.Partial("_LoginPartial")
             </ul>
+            <ul>
+                @Html.ActionLink("News System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand actionLink" })
+                <li></li>
+            </ul>
         </div>
     </nav>
-    @*<div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>*@
     <div class="container body-content">
         @RenderBody()
         <hr />

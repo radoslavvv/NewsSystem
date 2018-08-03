@@ -1,0 +1,34 @@
+﻿@model IEnumerable<NewsSystem.Models.ViewModels.CategoryViewModel>
+
+
+<div id="table">
+    <h1>All Categories: </h1>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <div>
+                        <a class="btn btn-light" href="edit/@item.CategoryId">Edit</a>
+                        <a class="btn btn-danger" href="delete/@item.CategoryId">Delete</a
+                    </div>
+                </td>
+            </tr>
+        }
+
+
+    </table>
+    <div class="text-center">
+        <a href="create" type="button" class="btn btn-dark text-center">Create New Category</a>
+    </div>
+</div>

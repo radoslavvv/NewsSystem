@@ -10,13 +10,7 @@ namespace NewsSystem.Models
 {
     public class Category
     {
-        public Category()
-        {
-            this.Articles = new List<Article>();
-        }
-
         [Key]
-        [Index(IsUnique = true)]
         public int CategoryId { get; set; }
 
         [Required]

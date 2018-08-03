@@ -19,5 +19,31 @@ namespace NewsSystem.Services
 
             return articleViewModels;
         }
+
+        public Article GetArticleById(int id)
+        {
+            Article article = this.Context.Articles.Find(id);
+
+            return article;
+        }
+
+        public IEnumerable<ArticleViewModel> GetAllArticles()
+        {
+            IEnumerable<Article> articles = this.Context.Articles.ToList();
+            IEnumerable<ArticleViewModel> articleViewModels = Mapper.Instance.Map<IEnumerable<Article>, IEnumerable<ArticleViewModel>>(articles);
+
+            return articleViewModels;
+        }
+
+        public void DeleteArticlesFromCategory(int categoryId)
+        {
+            List<Article> articlesToRemove = this.Context
+                .Articles
+                .Where(a => a.CategoryId == categoryId)
+                .ToList();
+
+            this.Context.Articles.RemoveRange(articlesToRemove);
+            this.Context.SaveChanges();
+        }
     }
 }

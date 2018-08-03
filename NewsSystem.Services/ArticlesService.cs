@@ -14,7 +14,7 @@ namespace NewsSystem.Services
     {
         public IEnumerable<ArticleViewModel> ListTopThreeArticles()
         {
-            IEnumerable<Article> articles = this.Context.Articles.OrderBy(a => a.Likes.Count).Take(3).ToList();
+            IEnumerable<Article> articles = this.Context.Articles.OrderByDescending(a => a.Likes.Sum(l => l.Value)).Take(3).ToList();
             IEnumerable<ArticleViewModel> articleViewModels = Mapper.Instance.Map<IEnumerable<Article>, IEnumerable<ArticleViewModel>>(articles);
 
             return articleViewModels;
@@ -43,6 +43,33 @@ namespace NewsSystem.Services
                 .ToList();
 
             this.Context.Articles.RemoveRange(articlesToRemove);
+            this.Context.SaveChanges();
+        }
+
+        public void AddArticle(Article article)
+        {
+            this.Context.Articles.Add(article);
+            this.Context.SaveChanges();
+        }
+
+        public Article FindArticleById(int? id)
+        {
+            Article article = this.Context.Articles.Find(id);
+
+            return article;
+        }
+
+        public void EditArticle(Article article)
+        {
+            Article articleToEdit = this.Context.Articles.Find(article.ArticleId);
+
+            this.Context.Entry(articleToEdit).CurrentValues.SetValues(article);
+            this.Context.SaveChanges();
+        }
+
+        public void DeleteArticle(Article article)
+        {
+            this.Context.Articles.Remove(article);
             this.Context.SaveChanges();
         }
     }

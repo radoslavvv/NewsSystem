@@ -11,10 +11,12 @@ namespace NewsSystem.Models.ViewModels
     {
         public int ArticleId { get; set; }
 
+        [DisplayName("Title")]
         public string Title { get; set; }
 
         public string Content { get; set; }
 
+        [DisplayName("Date of Creation")]
         public DateTime CreationDate { get; set; }
 
         public virtual User Author { get; set; }

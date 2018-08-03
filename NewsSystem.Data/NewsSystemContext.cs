@@ -21,6 +21,7 @@ namespace NewsSystem.Data
 
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
+
         public virtual DbSet<Category> Categories { get; set; }
 
         public virtual DbSet<Article> Articles { get; set; }
@@ -31,5 +32,7 @@ namespace NewsSystem.Data
         {
             return new NewsSystemContext();
         }
+
+        //public System.Data.Entity.DbSet<NewsSystem.Controllers.a> a { get; set; }
     }
 }

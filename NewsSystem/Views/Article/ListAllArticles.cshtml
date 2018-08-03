@@ -1,0 +1,45 @@
+﻿@model IEnumerable<NewsSystem.Models.ViewModels.ArticleViewModel>
+
+<div id="table">
+    <h1>All News: </h1>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.UserName)
+            </td>
+            <td>
+                <div>
+                    <a class="btn btn-light" href="edit/@item.ArticleId">Edit</a>
+                    <a class="btn btn-danger" href="delete/@item.ArticleId">Delete</a>
+                </div>
+            </td>
+
+        </tr>
+        }
+
+
+    </table>
+    <div class="text-center">
+        <a href="create" type="button" class="btn btn-dark text-center">Create New Article</a>
+    </div>
+</div>

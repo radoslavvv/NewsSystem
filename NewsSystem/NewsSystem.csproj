@@ -196,7 +196,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\a.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\aController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -270,7 +272,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -315,7 +319,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\_TopArticlesPartial.cshtml" />
     <Content Include="Views\Home\_AllCategoriesPartitial.cshtml" />
-    <Content Include="Views\Article\Details.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Category\ListAllCategories.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
@@ -326,10 +329,19 @@
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Article\ListAllArticles.cshtml" />
+    <Content Include="Views\Article\Create.cshtml" />
+    <Content Include="Views\Article\Delete.cshtml" />
+    <Content Include="Views\Article\Edit.cshtml" />
+    <Content Include="Views\a\Create.cshtml" />
+    <Content Include="Views\a\Delete.cshtml" />
+    <Content Include="Views\a\Details.cshtml" />
+    <Content Include="Views\a\Edit.cshtml" />
+    <Content Include="Views\a\Index.cshtml" />
+    <Content Include="Views\Article\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Cat\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -28,6 +28,6 @@ namespace NewsSystem.Models
             return Task.FromResult(GenerateUserIdentity(manager));
         }
 
-       // public virtual ICollection<Like> Likes { get; set; }
+        public virtual ICollection<Like> Likes { get; set; }
     }
 }

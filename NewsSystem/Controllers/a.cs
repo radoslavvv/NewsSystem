@@ -1,20 +1,19 @@
-﻿using System;
+﻿using NewsSystem.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-namespace NewsSystem.Models
+namespace NewsSystem.Controllers
 {
-    public class Article
+    public class a
     {
         [Key]
         public int ArticleId { get; set; }
 
-        [MinLength(45)]
-        [Required]
         public string Title { get; set; }
 
-        [MinLength(150)]
-        [Required]
         public string Content { get; set; }
 
         [DataType(DataType.Date)]

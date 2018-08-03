@@ -15,10 +15,13 @@ namespace NewsSystem.Controllers
     {
         private CategoriesServices categoryService;
         private ArticlesService articlesService;
+        private LikesService likesService;
+
         public CategoryController()
         {
             this.categoryService = new CategoriesServices();
             this.articlesService = new ArticlesService();
+            this.likesService = new LikesService();
         }
 
         public ActionResult Index(string categoryName)
@@ -111,6 +114,7 @@ namespace NewsSystem.Controllers
         {
             Category category = this.categoryService.FindCategoryById(id);
 
+            this.likesService.DeleteLike(id);
             this.articlesService.DeleteArticlesFromCategory(id);
             this.categoryService.DeleteCategory(category);
 

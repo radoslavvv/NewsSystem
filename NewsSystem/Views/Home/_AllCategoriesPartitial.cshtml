@@ -3,25 +3,25 @@
 <div class="h1 text-center">Latest News: </div>
 @foreach (CategoryViewModel category in ViewBag.Categories)
 {
-
-    <div class="card mb-4 shadow-sm">
+    <div class="card-deck mb-3">
+    <div class="card mb-4 shadow-sm h-100">
         <div class="card-header">
             <h4 class="my-0 font-weight-normal text-center">@category.Name</h4>
         </div>
         <div class="card-body">
             <ul class="list-unstyled mt-3 mb-4">
-                @for (int i = 0; i < 3; i++)
-                {
+                @foreach (ArticleViewModel article in category.Articles)
+                { 
                     <li class="card-title h3">
-                        <a class="text-dark" href="/Article/Details/@category.Articles[i].ArticleId">
-                            @category.Articles[i].Title
+                        <a class="text-dark" href="/Article/Details/@article.ArticleId">
+                            @article.Title
                         </a>
                     </li>
-                    <li class="text-right h5 font-italic">- Author: @category.Articles[i].Author.UserName</li>
+                <li class="text-right h5 font-italic">- Author: @article.Author.UserName</li>
                 }
             </ul>
             <a type="button" href="/category/all/@category.Name" class="btn btn-lg btn-block btn-outline-primary">See more from @category.Name</a>
         </div>
     </div>
-
+        </div>
 }

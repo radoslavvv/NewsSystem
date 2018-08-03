@@ -60,3 +60,16 @@ textarea {
 .btn-light {
     background-color: #d8d4d4;
 }
+
+#Content {
+    resize: both;
+    max-width: 850px;;
+}
+
+.card{
+    height: 500px;
+}
+
+.paragprah {
+    text-indent: 50px;
+}

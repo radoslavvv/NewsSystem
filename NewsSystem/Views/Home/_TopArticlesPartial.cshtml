@@ -3,7 +3,6 @@
 @model  IEnumerable<ArticleViewModel>
 
 <div id="front-page-articles" class="container">
-
     <div class="h1 text-center">Most Popular News: </div>
     <div class="row">
         @foreach (ArticleViewModel article in Model)
@@ -17,7 +16,7 @@
                         </h3>
                         <div class="mb-1 text-muted">@article.CreationDate</div>
                         <p class="card-text mb-auto">@article.Content</p>
-                        <a href="#">Continue reading</a>
+                        <a href="/Article/Details/@article.ArticleId">Continue reading</a>
                     </div>
                 </div>
             </div>

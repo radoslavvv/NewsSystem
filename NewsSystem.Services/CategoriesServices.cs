@@ -14,7 +14,7 @@ namespace NewsSystem.Services
     {
         public IEnumerable<CategoryViewModel> GetAllCategories()
         {
-            IEnumerable<Category> categories = this.Context.Categories.Include(c => c.Articles).ToList();
+            IEnumerable<Category> categories = this.Context.Categories.ToList();
             IEnumerable<CategoryViewModel> categoryViewModels = Mapper.Instance.Map<IEnumerable<Category>, IEnumerable<CategoryViewModel>>(categories);
 
             return categoryViewModels;

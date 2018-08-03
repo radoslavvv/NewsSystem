@@ -7,6 +7,11 @@
     <title>@ViewBag.Title - News System</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/popper.min.js")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
 </head>
 <body>
@@ -28,19 +33,18 @@
                 @if (Request.IsAuthenticated)
                 {
                     <li class="nav-item">
-                        @Html.ActionLink("News", "ListAllNews", "News", null, new { @class = "actionLink nav-link" })
+                        @Html.ActionLink("News", "ListAllArticles", "Article", null, new { @class = "actionLink nav-link" })
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Categories", "ListAllCategories", "Category", null, new { @class = "actionLink nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("News System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand actionLink" })
                     </li>
                 }
             </ul>
             <ul class="navbar-nav ">
                 @Html.Partial("_LoginPartial")
-            </ul>
-            <ul>
-                @Html.ActionLink("News System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand actionLink" })
-                <li></li>
             </ul>
         </div>
     </nav>
@@ -52,8 +56,5 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

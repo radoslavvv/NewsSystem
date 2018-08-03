@@ -1,49 +1,43 @@
 ﻿@model NewsSystem.Models.Article
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayName("Title: ")
-        </dt>
+<div class="jumbotron">
+    <div>
+        <h3>@Model.Title</h3>
+        <hr />
+        <div class="dl-horizontal">
+            <div>
+                <p class="paragraph">@Model.Content</p>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <div>
+                <dt>
+                    @Html.DisplayName("Date of Creation:")
 
-        <dt>
-            @Html.DisplayName("Content: ")
-        </dt>
+                </dt>
+                <div class="float-right">
+                    <dd>
+                        <p><strong>Author: </strong>@Model.Author.UserName</p>
+                        <p><strong>Likes: </strong>@Model.Likes.Sum(l => l.Value)</p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
+                    </dd>
+                </div>
+                <dd>
+                    @Html.DisplayFor(model => model.CreationDate)
+                </dd>
+                <div class="text-center">
+                    <a href="~/article/details/@Model.ArticleId/Like" class="btn btn-success">Like</a>
+                    <a href="~/article/details/@Model.ArticleId/Dislike" class="btn btn-danger ">Dislike</a>
+                </div>
+                <div>
+                    <a href="~/home/index" class="btn btn-dark">Return</a>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayName("Category Name:")
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.Name)
-        </dd>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayName("Created On: ")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreationDate)
-        </dd>
-        <dt>
-            @Html.DisplayName("Author: ")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Author.UserName)
-        </dd>
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+

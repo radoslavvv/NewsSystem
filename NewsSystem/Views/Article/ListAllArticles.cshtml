@@ -1,40 +1,53 @@
-﻿@model IEnumerable<NewsSystem.Models.ViewModels.ArticleViewModel>
+﻿@model PagedList.IPagedList<NewsSystem.Models.ViewModels.ArticleViewModel>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 <div id="table">
     <h1>All News: </h1>
+    <div>
+        <h3>
+            Order By:
+            @Html.ActionLink("Title", "ListAllArticles", new { sortOrder = ViewBag.TitleSortParm }, htmlAttributes: new { @class = "btn btn-light" })
+            @Html.ActionLink("Date", "ListAllArticles", new { sortOrder = ViewBag.DateSortParm }, htmlAttributes: new { @class = "btn btn-light" })
+        </h3>
+    </div>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayName("Title: ")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Content)
+                @Html.DisplayName("Content: ")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Author)
+                @Html.DisplayName("Author:")
             </th>
         </tr>
 
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author.UserName)
-            </td>
-            <td>
-                <div>
-                    <a class="btn btn-light" href="edit/@item.ArticleId">Edit</a>
-                    <a class="btn btn-danger" href="delete/@item.ArticleId">Delete</a>
-                </div>
-            </td>
-
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.UserName)
+                </td>
+                <td>
+                    <div>
+                        <a class="btn btn-light" href="edit/@item.ArticleId">Edit</a>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <a class="btn btn-danger" href="delete/@item.ArticleId">Delete</a>
+                    </div>
+                </td>
+            </tr>
         }
 
 
@@ -42,4 +55,14 @@
     <div class="text-center">
         <a href="create" type="button" class="btn btn-dark text-center">Create New Article</a>
     </div>
+    <br />
+    <div class="text-center">
+        <br />
+        <div class="text-center">
+            @Html.PagedListPager(Model, page => Url.Action("ListAllArticles",
+                                         new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+        <div class="text-center">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+    </div>
 </div>
+

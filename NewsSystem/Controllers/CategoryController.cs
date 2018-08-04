@@ -1,6 +1,7 @@
 ﻿using NewsSystem.Models;
 using NewsSystem.Models.ViewModels;
 using NewsSystem.Services;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,11 +33,33 @@ namespace NewsSystem.Controllers
         }
 
         [Authorize]
-        public ActionResult ListAllCategories()
+        public ActionResult ListAllCategories(string sortOrder, int? page)
         {
-            IEnumerable<CategoryViewModel> categories = this.categoryService.GetAllCategories();
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.TitleSortParm = sortOrder == "name" ? "name_desc" : "name";
+            ViewBag.DateSortParm = sortOrder == "articles" ? "articles_desc" : "articles";
 
-            return View(categories);
+            IEnumerable<CategoryViewModel> categories = this.categoryService.GetAllCategories();
+            switch (sortOrder)
+            {
+                case "name":
+                    categories = categories.OrderBy(a => a.Name);
+                    break;
+                case "name_desc":
+                    categories = categories.OrderByDescending(a => a.Name);
+                    break;
+                case "articles":
+                    categories = categories.OrderBy(a => a.Articles.Count);
+                    break;
+                case "articles_desc":
+                    categories = categories.OrderByDescending(a => a.Articles.Count);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            return View(categories.ToPagedList(pageNumber, pageSize));
         }
 
         [Authorize]

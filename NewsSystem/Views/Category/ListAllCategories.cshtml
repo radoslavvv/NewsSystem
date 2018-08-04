@@ -1,11 +1,22 @@
-﻿@model IEnumerable<NewsSystem.Models.ViewModels.CategoryViewModel>
+﻿@model PagedList.IPagedList<NewsSystem.Models.ViewModels.CategoryViewModel>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 <div id="table">
     <h1>All Categories: </h1>
+    <div>
+        <h3>
+            Order By:
+            @Html.ActionLink("Name", "ListAllCategories", new { sortOrder = ViewBag.TitleSortParm }, htmlAttributes: new { @class = "btn btn-light" })
+            @Html.ActionLink("Articles", "ListAllCategories", new { sortOrder = ViewBag.DateSortParm }, htmlAttributes: new { @class = "btn btn-light" })
+        </h3>
+    </div>
+
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayName("Name: ")
             </th>
             <th></th>
         </tr>
@@ -29,5 +40,14 @@
     </table>
     <div class="text-center">
         <a href="create" type="button" class="btn btn-dark text-center">Create New Category</a>
+    </div>
+    <br />
+    <div class="text-center">
+        <br />
+        <div class="text-center">
+            @Html.PagedListPager(Model, page => Url.Action("ListAllCategories",
+                                                        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+        <div class="text-center">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
     </div>
 </div>

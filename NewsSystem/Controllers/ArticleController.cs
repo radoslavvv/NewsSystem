@@ -2,6 +2,7 @@
 using NewsSystem.Models;
 using NewsSystem.Models.ViewModels;
 using NewsSystem.Services;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,11 +62,34 @@ namespace NewsSystem.Controllers
         }
 
         [Authorize]
-        public ActionResult ListAllArticles()
+        public ActionResult ListAllArticles(string sortOrder, int? page)
         {
             IEnumerable<ArticleViewModel> articles = this.articlesService.GetAllArticles();
 
-            return View(articles);
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.TitleSortParm = sortOrder == "title" ? "title_desc" : "title";
+            ViewBag.DateSortParm = sortOrder == "date" ? "date_desc" : "date";
+
+            switch (sortOrder)
+            {
+                case "title":
+                    articles = articles.OrderBy(a => a.Title);
+                    break;
+                case "tile_desc":
+                    articles = articles.OrderByDescending(a => a.Title);
+                    break;
+                case "date":
+                    articles = articles.OrderBy(a => a.CreationDate);
+                    break;
+                case "date_desc":
+                    articles = articles.OrderByDescending(a => a.CreationDate);
+                    break;
+            }
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+
+            return View(articles.ToPagedList(pageNumber, pageSize));
         }
 
         [Authorize]

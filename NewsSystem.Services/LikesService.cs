@@ -38,7 +38,6 @@ namespace NewsSystem.Services
                 };
 
                 article.Likes.Add(like);
-
                 this.Context.SaveChanges();
             }
         }

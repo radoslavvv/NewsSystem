@@ -29,7 +29,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    <a class="text-dark" href="/Article/Details/@item.ArticleId">@item.Title</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Content)
@@ -60,7 +60,7 @@
         <br />
         <div class="text-center">
             @Html.PagedListPager(Model, page => Url.Action("ListAllArticles",
-                                         new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                                                                  new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </div>
         <div class="text-center">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
     </div>

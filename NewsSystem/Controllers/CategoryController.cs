@@ -25,11 +25,14 @@ namespace NewsSystem.Controllers
             this.likesService = new LikesService();
         }
 
-        public ActionResult Index(string categoryName)
+        public ActionResult Index(string categoryName, int? page)
         {
             IEnumerable<ArticleViewModel> articles = this.categoryService.ListAllArticlesForCategory(categoryName);
 
-            return View(articles);
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            return View(articles.ToPagedList(pageNumber, pageSize));
         }
 
         [Authorize]
@@ -103,7 +106,7 @@ namespace NewsSystem.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryId,Name")] Category category)
+        public ActionResult Edit([Bind(Include = "CategoryId, Name")] Category category)
         {
             if (ModelState.IsValid)
             {

@@ -1,5 +1,10 @@
 ﻿@model NewsSystem.Models.Article
 
+@Scripts.Render("~/Scripts/jquery-3.3.1.js")
+@Scripts.Render("~/Scripts/jquery-3.3.1.min.js")
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
 <div class="jumbotron">
     <div>
         <h3>@Model.Title</h3>
@@ -12,32 +17,69 @@
             <div>
                 <dt>
                     @Html.DisplayName("Date of Creation:")
-
                 </dt>
                 <div class="float-right">
                     <dd>
                         <p><strong>Author: </strong>@Model.Author.UserName</p>
-                        <p><strong>Likes: </strong>@Model.Likes.Sum(l => l.Value)</p>
-
+                        <p><strong>Likes: </strong><span id="likes">@Model.Likes.Sum(l => l.Value)</span></p>
                     </dd>
                 </div>
                 <dd>
                     @Html.DisplayFor(model => model.CreationDate)
                 </dd>
                 <div class="text-center">
-                    <a href="~/article/details/@Model.ArticleId/Like" class="btn btn-success">Like</a>
-                    <a href="~/article/details/@Model.ArticleId/Dislike" class="btn btn-danger ">Dislike</a>
+                    @Ajax.ActionLink("Like", "Like", new { id = Model.ArticleId }, new AjaxOptions
+               {
+                   UpdateTargetId = "likes",
+                   InsertionMode = InsertionMode.Replace,
+                   HttpMethod = "GET",
+               }, new { @class = "btn btn-success text-center", id = "like-button"})
+
+                    @Ajax.ActionLink("Dislike", "Dislike", new { id = Model.ArticleId }, new AjaxOptions
+                    {
+                        UpdateTargetId = "likes",
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "GET"
+                    }, new { @class = "btn btn-danger text-center" })
+
                 </div>
                 <div>
                     <a href="~/home/index" class="btn btn-dark">Return</a>
                 </div>
             </div>
 
-
         </div>
     </div>
 
 </div>
 
+<script>
+    function() {
+        var btn = document.getElementById(""like- button"");
+        btn.style.backgroundColor = "#FFFFFF";
+    }
+</script>
+@*<script>
+        $(function () {
+            $('.like').click(function () { likeFunction(this); });
+            $('.dislike').click(function () { dislikeFunction(this); });
+        });
 
+        function likeFunction(caller) {
+            $.ajax({
+                type: "POST",
+                url: "~/article/details/@Model.ArticleId/like",
+                data: new {id = @Model.ArticleId},
+                success: function () { }
+            });
+        }
+        function dislikeFunction(caller) {
+            $.ajax({
+                type: "POST",
+                url: $"~/article/details/@Model.ArticleId/dislike",
+                data: new {id = @Model.ArticleId},
+                success: function () { }
+            });
+        }
+    </script>*@
 

@@ -38,12 +38,14 @@
                     <li class="nav-item">
                         @Html.ActionLink("Categories", "ListAllCategories", "Category", null, new { @class = "actionLink nav-link" })
                     </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("News System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand actionLink" })
-                    </li>
+
                 }
             </ul>
+            
             <ul class="navbar-nav ">
+                <li class="nav-item">
+                    @Html.ActionLink("News System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand actionLink" })
+                </li>
                 @Html.Partial("_LoginPartial")
             </ul>
         </div>
@@ -52,7 +54,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - News System</p>
+            <p>&copy; @DateTime.Now.Year - Radoslav Varadinov - News System</p>
         </footer>
     </div>
 

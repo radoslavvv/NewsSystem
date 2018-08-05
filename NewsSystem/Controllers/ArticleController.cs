@@ -17,7 +17,6 @@ namespace NewsSystem.Controllers
     {
         private ArticlesService articlesService;
         private LikesService likesService;
-
         public ArticleController()
         {
             this.articlesService = new ArticlesService();
@@ -31,34 +30,31 @@ namespace NewsSystem.Controllers
             return View(article);
         }
 
+        [HttpGet]
         [Authorize]
-        public ActionResult Like(int id)
+        public int Like(int id)
         {
             Article article = this.articlesService.Context.Articles.FirstOrDefault(a => a.ArticleId == id);
-            if (article == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             string userId = this.User.Identity.GetUserId();
             this.likesService.LikeArticle(id, userId);
 
-            return RedirectToAction("Details");
+            int likesValue = this.articlesService.Context.Articles.FirstOrDefault(a => a.ArticleId == id).Likes.Sum(l => l.Value);
+
+            return likesValue;
         }
 
         [Authorize]
-        public ActionResult Dislike(int id)
+        public int Dislike(int id)
         {
             Article article = this.articlesService.Context.Articles.FirstOrDefault(a => a.ArticleId == id);
-            if (article == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             string userId = this.User.Identity.GetUserId();
             this.likesService.DislikeArticle(id, userId);
 
-            return RedirectToAction("Details");
+            int likesValue = this.articlesService.Context.Articles.FirstOrDefault(a => a.ArticleId == id).Likes.Sum(l => l.Value);
+
+            return likesValue;
         }
 
         [Authorize]
@@ -85,6 +81,7 @@ namespace NewsSystem.Controllers
                     articles = articles.OrderByDescending(a => a.CreationDate);
                     break;
             }
+
             int pageSize = 5;
             int pageNumber = (page ?? 1);
 

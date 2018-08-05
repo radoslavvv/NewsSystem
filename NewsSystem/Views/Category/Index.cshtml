@@ -1,36 +1,48 @@
-﻿@model IEnumerable<NewsSystem.Models.ViewModels.ArticleViewModel>
+﻿@model PagedList.IPagedList<NewsSystem.Models.ViewModels.ArticleViewModel>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 <table id="table" class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayName("Title: ")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Content)
+            @Html.DisplayName("Content: ")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreationDate)
+            @Html.DisplayName("Creation Date: ")
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreationDate)
-        </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>*@
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a class="text-dark" href="/Article/Details/@item.ArticleId">@item.Title</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+
+        </tr>
+    }
+
 
 </table>
+
+<br />
+<div class="text-center">
+    <br />
+    <div class="text-center">
+        @Html.PagedListPager(Model, page => Url.Action("ListAllCategories",
+                                                                              new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <div class="text-center">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+</div>
+

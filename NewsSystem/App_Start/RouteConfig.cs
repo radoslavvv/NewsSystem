@@ -13,7 +13,6 @@ namespace NewsSystem
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-
             routes.MapRoute(
               name: "Like Article",
               url: "article/details/{id}/like",

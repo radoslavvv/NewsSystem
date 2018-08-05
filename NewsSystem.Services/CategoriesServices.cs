@@ -22,6 +22,11 @@ namespace NewsSystem.Services
 
         public IEnumerable<ArticleViewModel> ListAllArticlesForCategory(string categoryName)
         {
+            if(categoryName == null)
+            {
+                throw new Exception();
+            }
+
             List<Article> articles = this.Context
                 .Categories
                 .Include(c => c.Articles)
@@ -37,7 +42,7 @@ namespace NewsSystem.Services
         {
             if (id == null)
             {
-                return null;
+                throw new Exception();
             }
 
             Category category = this.Context.Categories.Find(id);
@@ -47,12 +52,22 @@ namespace NewsSystem.Services
 
         public void AddCategory(Category category)
         {
+            if(category == null)
+            {
+                throw new Exception();
+            }
+
             this.Context.Categories.Add(category);
             this.Context.SaveChanges();
         }
 
         public void EditCategory(Category category)
         {
+            if (category == null)
+            {
+                throw new Exception();
+            }
+
             Category categoryToEdit = this.Context.Categories.Find(category.CategoryId);
 
             this.Context.Entry(categoryToEdit).CurrentValues.SetValues(category);
@@ -61,6 +76,11 @@ namespace NewsSystem.Services
 
         public void DeleteCategory(Category category)
         {
+            if (category == null)
+            {
+                throw new Exception();
+            }
+
             this.Context.Categories.Remove(category);
             this.Context.SaveChanges();
         }

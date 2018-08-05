@@ -11,11 +11,6 @@ namespace NewsSystem.Models
 {
     public class User : IdentityUser
     {
-        //public User()
-        //{
-        //    this.Likes = new List<Like>();
-        //}
-
         public ClaimsIdentity GenerateUserIdentity(UserManager<User> manager)
         {
             ClaimsIdentity userIdentity = manager.CreateIdentity(this, DefaultAuthenticationTypes.ApplicationCookie);

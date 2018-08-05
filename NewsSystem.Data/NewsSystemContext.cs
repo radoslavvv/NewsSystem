@@ -15,6 +15,7 @@ namespace NewsSystem.Data
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -32,7 +33,5 @@ namespace NewsSystem.Data
         {
             return new NewsSystemContext();
         }
-
-        //public System.Data.Entity.DbSet<NewsSystem.Controllers.a> a { get; set; }
     }
 }

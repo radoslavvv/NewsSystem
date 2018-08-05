@@ -11,13 +11,14 @@ namespace NewsSystem.Services
     {
         public void LikeArticle(int articleId, string authorId)
         {
-            Article article = this.Context.Articles.FirstOrDefault(a => a.ArticleId == articleId);
+            Article article = this.Context
+                .Articles
+                .FirstOrDefault(a => a.ArticleId == articleId);
 
             if (article.Likes.Any(a => a.AuthorId == authorId))
             {
-                int value = article.Likes.FirstOrDefault(l => l.AuthorId == authorId).Value;
-
-                if (value == 1)
+                int likeValue = article.Likes.FirstOrDefault(l => l.AuthorId == authorId).Value;
+                if (likeValue == 1)
                 {
                     article.Likes.FirstOrDefault(l => l.AuthorId == authorId).Value = 0;
                 }
@@ -48,16 +49,15 @@ namespace NewsSystem.Services
 
             if (article.Likes.Any(a => a.AuthorId == authorId))
             {
-                int value = article.Likes.FirstOrDefault(l => l.AuthorId == authorId).Value;
+                int likeValue = article.Likes.FirstOrDefault(l => l.AuthorId == authorId).Value;
 
-                if (value == -1)
+                if (likeValue == -1)
                 {
                     article.Likes.FirstOrDefault(l => l.AuthorId == authorId).Value = 0;
                 }
                 else
                 {
                     article.Likes.FirstOrDefault(l => l.AuthorId == authorId).Value = -1;
-
                 }
 
                 this.Context.SaveChanges();

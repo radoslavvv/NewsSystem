@@ -30,7 +30,6 @@ namespace NewsSystem.Controllers
             return View(article);
         }
 
-        [HttpGet]
         [Authorize]
         public int Like(int id)
         {
@@ -85,7 +84,6 @@ namespace NewsSystem.Controllers
             int pageSize = 5;
             int pageNumber = (page ?? 1);
 
-
             return View(articles.ToPagedList(pageNumber, pageSize));
         }
 
@@ -129,7 +127,6 @@ namespace NewsSystem.Controllers
             {
                 return HttpNotFound();
             }
-
 
             ViewBag.AuthorId = new SelectList(this.articlesService.Context.Users, "Id", "UserName", article.AuthorId);
             ViewBag.CategoryId = new SelectList(this.articlesService.Context.Categories, "CategoryId", "Name", article.CategoryId);

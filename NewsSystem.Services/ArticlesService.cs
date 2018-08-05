@@ -48,12 +48,22 @@ namespace NewsSystem.Services
 
         public void AddArticle(Article article)
         {
+            if(article == null)
+            {
+                throw new Exception();
+            }
+
             this.Context.Articles.Add(article);
             this.Context.SaveChanges();
         }
 
         public Article FindArticleById(int? id)
         {
+            if(id == null)
+            {
+                throw new Exception();
+            }
+
             Article article = this.Context.Articles.Find(id);
 
             return article;
@@ -61,6 +71,11 @@ namespace NewsSystem.Services
 
         public void EditArticle(Article article)
         {
+            if(article == null)
+            {
+                throw new Exception();
+            }
+
             Article articleToEdit = this.Context.Articles.Find(article.ArticleId);
 
             this.Context.Entry(articleToEdit).CurrentValues.SetValues(article);
@@ -69,6 +84,11 @@ namespace NewsSystem.Services
 
         public void DeleteArticle(Article article)
         {
+            if (article == null)
+            {
+                throw new Exception();
+            }
+
             this.Context.Articles.Remove(article);
             this.Context.SaveChanges();
         }

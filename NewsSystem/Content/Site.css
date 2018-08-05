@@ -86,3 +86,11 @@ textarea {
     border-color: rgb(52, 58, 64);
     color: rgb(52, 58, 64);
 }
+
+body .actionLink {
+    font-family: Poppins;
+}
+
+body {
+    font-family: Poppins;
+}
